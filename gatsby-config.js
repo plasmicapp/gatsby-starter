@@ -2,13 +2,13 @@ module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Plasmic Team`,
+      summary: `building a fast and fun visual builder for React.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `A starter blog demonstrating what Plasmic+Gatsby can do.`,
+    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `plasmicapp`,
     },
   },
   plugins: [
@@ -126,5 +126,11 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: `@plasmicapp/loader/gatsby`,
+      options: {
+        projects: ["asqKkLevLrSacxedRcECnU"], // An array of project ids.
+      },
+    },
   ],
 }

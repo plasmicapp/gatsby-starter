@@ -1,44 +1,74 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2830cee0-a304-41bf-bf26-5540de703090/deploy-status)](https://app.netlify.com/sites/plasmic-gatsby-starter-blog/deploys)
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
+  <a href="https://www.plasmic.app">
+    <img alt="Plasmic" role="img" src="https://cdn-images-1.medium.com/max/176/1*D1nV2o_le9dJEO3G80P4xg@2x.png" width="120">
+  </a>
   <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby's blog starter
+  Plasmic+Gatsby starter
 </h1>
 
-Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Kick off your project with this boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Demo
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
+[https://plasmic-gatsby-starter-blog.netlify.app](https://plasmic-gatsby-starter-blog.netlify.app)
 
 ## 🚀 Quick start
 
 1.  **Create a Gatsby site.**
 
-    Use the Gatsby CLI to create a new site, specifying the blog starter.
+    Use the Gatsby CLI to create a new site, specifying the starter repo,
+    and navigate to the new project.
 
     ```shell
     # create a new Gatsby site using the blog starter
-    gatsby new my-blog-starter https://github.com/gatsbyjs/gatsby-starter-blog
+    gatsby new my-site https://github.com/plasmicapp/gatsby-starter
+    cd my-site/
     ```
 
-1.  **Start developing.**
+1. **Authenticate with Plasmic**
 
-    Navigate into your new site’s directory and start it up.
+    Run the following to authenticate your system
 
-    ```shell
-    cd my-blog-starter/
-    gatsby develop
+    ```bash
+    npx -p @plasmicapp/cli plasmic auth
     ```
 
-1.  **Open the source code and start editing!**
+1. **Clone a Plasmic project starter**
 
-    Your site is now running at `http://localhost:8000`!
+    Log into [Plasmic](https://studio.plasmic.app/),
+    click on "New Project",
+    and clone one of the starter projects into your own workspace.
+    We recommend the "Starter Blog" project.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
+    ![dashboard](https://docs.plasmic.app/static/new-project-modal-20e03cbd03100f253f484cfc6b1b9f31.png)
 
-    Open the `my-blog-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+    When you do, note the `PROJECT_ID` in the URL (e.g. `https://studio.plasmic.app/projects/PROJECT_ID`).
+    Please check that you have write-access to the project,
+    otherwise you may be referencing read-only components.
+
+    _Note: This should work with any other website template, but you may need to delete `containerContents` in `index.js`. This relies on `ListItem`, which only exists for the Starter Blog._
+
+1. **Configure PlasmicLoader.**
+
+    Open `gatsby-config.js` and update the plugin configuration for `@plasmicapp/loader`
+    with the project ID of your Plasmic project.
+
+    Note: You may see a pre-existing project in the config that needs to be replaced.
+
+    ```js
+    {
+      resolve: `@plasmicapp/loader/gatsby`,
+      options: {
+        projects: ["PROJECT_ID"], // An array of project to sync.
+      },
+    },
+    ```
 
 ## 🧐 What's inside?
 
@@ -82,6 +112,12 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 12. **`README.md`**: A text file containing useful reference information about your project.
 
+
+## Learning Plasmic
+
+- Full Plasmic documentation lives at our [learning portal](https://www.plasmic.app/learn/).
+- **For most developers, we recommend starting with our [quickstart](https://www.plasmic.app/learn/quickstart/).
+
 ## 🎓 Learning Gatsby
 
 Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
@@ -90,10 +126,20 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 
 - **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
 
-## 💫 Deploy
+### To deploy with Netlify
 
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/cloud/)
-
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
+We already have a default `netlify.toml` config file for you.
+Remember to go into your Netlify project settings and set the following environment variables:
+- PLASMIC_AUTH_USER
+- PLASMIC_AUTH_TOKEN
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+## Troubleshooting
+
+If your build is failing, try the following:
+
+- Were any component/slot/variant names changed? Check the 2 following files to see how Plasmic is wired up to the rest of the application:
+  - [./src/pages/index.js](./src/pages/index.js)
+  - [./src/templates/blog-post.js](./src/templates/blog-post.js)
+
